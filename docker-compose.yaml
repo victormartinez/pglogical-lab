@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres_primary:
+    image: postgres:13
+    container_name: postgres_primary
+    environment:
+      POSTGRES_USER: user_primary
+      POSTGRES_PASSWORD: password_primary
+      POSTGRES_DB: db_primary
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres-lab-network
+
+  postgres_secondary:
+    image: postgres:13
+    container_name: postgres_secondary
+    environment:
+      POSTGRES_USER: user_secondary
+      POSTGRES_PASSWORD: password_secondary
+      POSTGRES_DB: db_secondary
+    ports:
+      - "5433:5432"
+    networks:
+      - postgres-lab-network
+
+networks:
+  postgres-lab-network:
+    driver: bridge
