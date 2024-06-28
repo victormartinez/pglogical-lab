@@ -11,11 +11,14 @@ db-upgrade:
 	PGPASSWORD=password_secondary psql -h 127.0.0.1 -p 5433 -U user_secondary -d db_secondary -a -f sql/ddl.sql
 
 
-.PHONY: init-replication
-init-replication:
+.PHONY: setup-replication
+setup-replication:
 	PGPASSWORD=password_primary psql -h 127.0.0.1 -p 5432 -U user_primary -d db_primary -a -f sql/publisher.sql
 	PGPASSWORD=password_secondary psql -h 127.0.0.1 -p 5433 -U user_secondary -d db_secondary -a -f sql/subscriber.sql
 
+.PHONY: load-primary-data
+load-primary-data:
+	PGPASSWORD=password_primary psql -h 127.0.0.1 -p 5432 -U user_primary -d db_primary -a -f sql/dml.sql
 
 .PHONY: connect-primary
 connect-primary:
@@ -24,10 +27,6 @@ connect-primary:
 .PHONY: connect-secondary
 connect-secondary:
 	PGPASSWORD=password_secondary pgcli -h 127.0.0.1 -p 5433 -U user_secondary -d db_secondary
-
-.PHONY: insert-data
-insert-data:
-	PGPASSWORD=password_primary psql -h 127.0.0.1 -p 5432 -U user_primary -d db_primary -a -f sql/dml.sql
 
 .PHONY: rm-containers
 rm-containers:
