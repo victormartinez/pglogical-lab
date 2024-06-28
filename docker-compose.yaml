@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres_primary:
-    image: postgres:13
+    build: .
     container_name: postgres_primary
     environment:
       POSTGRES_USER: user_primary
@@ -14,7 +14,7 @@ services:
       - postgres-lab-network
 
   postgres_secondary:
-    image: postgres:13
+    build: .
     container_name: postgres_secondary
     environment:
       POSTGRES_USER: user_secondary
