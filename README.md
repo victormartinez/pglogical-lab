@@ -65,3 +65,7 @@ make rm-images
 ## Useful Commands
 
 See [Useful commands ](./COMMANDS.md) for a set of commands you might need.
+
+## Nice to Know
+
+Read [this section](./NICETOKNOW.md) for important aspects.
