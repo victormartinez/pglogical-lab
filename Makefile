@@ -2,14 +2,12 @@
 up-containers:
 	docker compose up
 
-
 .PHONY: db-upgrade
 db-upgrade:
 	PGPASSWORD=password_primary psql -h 127.0.0.1 -p 5432 -U user_primary -d db_primary -a -f sql/extensions.sql
 	PGPASSWORD=password_primary psql -h 127.0.0.1 -p 5432 -U user_primary -d db_primary -a -f sql/ddl.sql
 	PGPASSWORD=password_secondary psql -h 127.0.0.1 -p 5433 -U user_secondary -d db_secondary -a -f sql/extensions.sql
 	PGPASSWORD=password_secondary psql -h 127.0.0.1 -p 5433 -U user_secondary -d db_secondary -a -f sql/ddl.sql
-
 
 .PHONY: setup-replication
 setup-replication:
