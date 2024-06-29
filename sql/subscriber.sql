@@ -8,5 +8,3 @@ SELECT pglogical.create_subscription(
     provider_dsn := 'host=postgres_primary port=5432 dbname=db_primary user=user_primary password=password_primary',
     replication_sets := ARRAY['replication_crm']
 );
-
-SELECT * FROM pglogical.show_subscription_status('subscription_for_primary_db');
