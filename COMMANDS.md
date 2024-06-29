@@ -76,5 +76,5 @@ select pglogical.drop_subscription('subscription_for_primary_db', true)
 ```
 
 OBS: 
-1. Tomar cuidado quando fizer o drop pois existem dados na réplica e quando a subscription for tentar de novo replicar vai levantar erro pois existem colunas unique.
-2. Antes de fazer o drop, desabilite a subscription. Senão workers podem ser interrompidos no meio da operação.
+1. Be careful when dropping because there are pieces of data in the replica; when subscription is recreated, the replication will fail due to existing primary keys (duplicate key value violates unique constraint).
+2. Before dropping the subscription disable it because there are workers in the background.
